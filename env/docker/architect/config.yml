@@ -1,0 +1,20 @@
+netidx_config: ./env/docker/netidx/client.json
+
+local:
+  1:
+    - Symbology
+    - {}
+  2:
+    - ChannelAuthority
+    - ~
+  3:
+    - Oms
+    - limits_file: "./env/docker/architect/limits.json"
+      forward_checked_orderflow_to:
+        to: 4
+        rule: Always
+  4:
+    - CptyMock
+    - {}
+
+remote: {}

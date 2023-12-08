@@ -1,0 +1,7 @@
+{
+  "max_open_qty": {},
+  "max_open_buy_qty": {},
+  "max_open_sell_qty": {},
+  "max_position": {},
+  "default_max_position": 100
+}

@@ -1,0 +1,7 @@
+{
+  "default_auth": "Anonymous",
+  "addrs": [
+    [ "127.0.0.1:4444", "Anonymous" ]
+  ],
+  "base": "/"
+}

@@ -1,0 +1,14 @@
+[package]
+name = "architect-rust-example"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1"
+architect-api = { version = "0.2.0", path = "../demon/api" }
+architect-sdk = { version = "0.2.0", path = "../demon/sdk" }
+rust_decimal = "1"
+rust_decimal_macros = "1"
+tokio = { version = "1", features = ["full"] }
