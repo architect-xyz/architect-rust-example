@@ -2,6 +2,7 @@ use anyhow::{anyhow, Result};
 use architect_sdk::{Common, oms::OmsClient, symbology::*};
 use architect_api::{Dir, orderflow::*};
 use rust_decimal_macros::dec;
+use tokio::select;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -23,7 +24,7 @@ async fn main() -> Result<()> {
     // already be set up for you.
     let mut oms = OmsClient::connect(&common, None, None).await?;
     let oid = oms.orderflow.next_order_id();
-    let market = Market::get("BTC Crypto/USD*OKX/DIRECT").ok_or_else(|| anyhow!("no symbol"))?;
+    let market = Market::get("BTC Crypto/USDT Crypto*OKX/DIRECT").ok_or_else(|| anyhow!("no symbol"))?;
     oms.orderflow.send(OrderflowMessage::Order(Order {
         id: oid,
         market: market.id,
@@ -39,6 +40,19 @@ async fn main() -> Result<()> {
             if update.state.contains(OrderStateFlags::Out) {
                 println!("order is out");
                 break 'outer;
+            }
+        }
+    }
+    // Look up fills for the order we just placed; we need to drive the oms.next()
+    // loop to get responses from the OMS, in addition to waiting on the response,
+    // so we'll need to use a select!
+    let mut fills = oms.get_fills(oid)?;
+    loop {
+        select! {
+            _ = oms.next() => {},
+            fills = &mut fills => {
+                println!("fills: {:?}", fills);
+                break;
             }
         }
     }
