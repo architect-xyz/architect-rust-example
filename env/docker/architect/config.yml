@@ -1,4 +1,4 @@
-#netidx_config: ./env/docker/netidx/client.json
+netidx_config: ./env/docker/netidx/client.json
 
 local:
   1:
@@ -14,7 +14,7 @@ local:
         to: 4
         rule: Always
   4:
-    - CptyMock
+    - MockCpty
     - {}
 
 remote: {}

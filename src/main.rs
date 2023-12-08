@@ -6,6 +6,7 @@ use tokio::select;
 
 #[tokio::main]
 async fn main() -> Result<()> {
+    env_logger::init();
     // Programs that run against the Architect core must load the same configuration file
     // that the core is running with.  The config file can be explicitly specified, or
     // found in an OS-default location.

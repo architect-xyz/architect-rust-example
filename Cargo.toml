@@ -7,8 +7,9 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1"
-architect-api = { version = "0.2.0", path = "../demon/api" }
-architect-sdk = { version = "0.2.0", path = "../demon/sdk" }
+architect-api = "0.2"
+architect-sdk = "0.2"
+env_logger = "0.10.1"
 rust_decimal = "1"
 rust_decimal_macros = "1"
 tokio = { version = "1", features = ["full"] }
